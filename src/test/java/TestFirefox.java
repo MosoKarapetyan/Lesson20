@@ -1,6 +1,4 @@
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.GeckoDriverInfo;
-import org.openqa.selenium.firefox.GeckoDriverService;
 import org.testng.annotations.Test;
 
 public class TestFirefox {
