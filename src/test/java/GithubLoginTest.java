@@ -36,7 +36,7 @@ public class GithubLoginTest {
         //Click on "Sign in" button
         loginElement.click();
 
-        Assert.assertTrue(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find element");
+        Assert.assertFalse(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find element");
         chrome.quit();
     }
 
@@ -183,5 +183,37 @@ public class GithubLoginTest {
         Assert.assertTrue(actions.isDisplayed(className("js-flash-alert"), 10), "Found the element");
 
         firefox.quit();
+    }
+    @Test
+    public void chromeCorrectUsernameValidationTestCase(){
+        //Tests the github login with correct input in email and password fields in chrome browser
+
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        ChromeDriver chrome=new ChromeDriver();
+        SeleniumActions actions=new SeleniumActions(chrome);
+
+        //Open https://github.com/login page
+        chrome.get("https://github.com/login");
+
+
+        WebElement emailElement=chrome.findElement(By.name("login"));
+        //Input valid email
+        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
+
+        WebElement passwordElement=chrome.findElement(By.name("password"));
+        //Input valid password
+        passwordElement.sendKeys("LoginTestCasePass");
+
+        WebElement loginElement=chrome.findElement(By.name("commit"));
+        //Click on "Sign in" button
+        loginElement.click();
+
+        WebElement buttonElement=chrome.findElement(By.className("Button-label"));
+        Assert.assertFalse(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find the element");
+        buttonElement.click();
+
+        Assert.assertTrue(actions.isDisplayed(By.className("Truncate-text"), 10), "Found the element");
+
+        chrome.quit();
     }
 }
