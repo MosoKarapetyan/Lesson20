@@ -14,205 +14,162 @@ import static org.openqa.selenium.By.className;
 public class GithubLoginTest {
     @Test
     public void chromePositiveTestCase(){
-        //Tests the github login with correct input in email and password fields in chrome browser
+        /*
+        Testing the github login with correct input in email and password fields in chrome browser
+        1. Open https://github.com/login page
+        2. Login using valid credentials
+        3. Assert that home page is displayed
+        */
 
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeDriver chrome=new ChromeDriver();
-        SeleniumActions actions=new SeleniumActions(chrome);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(chrome);
         chrome.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
 
-        WebElement emailElement=chrome.findElement(By.name("login"));
-        //Input valid email
-        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
+        HomePage homePage=new HomePage(chrome);
+        Assert.assertFalse(homePage.isDisplayed());
 
-        WebElement passwordElement=chrome.findElement(By.name("password"));
-        //Input valid password
-        passwordElement.sendKeys("LoginTestCasePass");
-
-        WebElement loginElement=chrome.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertFalse(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find element");
         chrome.quit();
     }
 
     @Test
     public void chromeTestLoginEmptyPass(){
-        //Tests the github login with correct input in email and empty password fields in chrome browser
+        /*Tests the github login with correct input in email and empty password fields in chrome browser
+        1. Open https://github.com/login page
+        2. Login using valid email credential and empty password field
+        3. Assert that error message is displayed
+        */
 
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeDriver chrome=new ChromeDriver();
-        SeleniumActions actions=new SeleniumActions(chrome);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(chrome);
         chrome.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("mesrop.karapetyan3@gmail.com", "");
 
-        WebElement emailElement=chrome.findElement(By.name("login"));
-        //Input valid email
-        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
-
-        WebElement passwordElement=chrome.findElement(By.name("password"));
-        //Password field is empty
-        passwordElement.sendKeys("");
-
-        WebElement loginElement=chrome.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertTrue(actions.isDisplayed(className("js-flash-alert"), 10), "Found the element");
+        ErrorMessage errorMessage=new ErrorMessage(chrome);
+        Assert.assertTrue(errorMessage.isDisplayed());
 
         chrome.quit();
     }
 
     @Test
     public void chromeTestLoginIncorrectLogin(){
-        //Tests the github login with incorrect input in email and correct password fields in chrome browser
+        /*Tests the github login with incorrect input in email and correct password fields in chrome browser
+        1. Open https://github.com/login page
+        2. Login using invalid email credential and valid password credential
+        3. Assert that error message is displayed
+        */
 
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeDriver chrome=new ChromeDriver();
-        SeleniumActions actions=new SeleniumActions(chrome);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(chrome);
         chrome.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("IncorrectLogin", "LoginTestCasePass");
 
-        WebElement emailElement=chrome.findElement(By.name("login"));
-        //Input invalid email
-        emailElement.sendKeys("IncorrectLogin");
-
-        WebElement passwordElement=chrome.findElement(By.name("password"));
-        //Input valid password
-        passwordElement.sendKeys("LoginTestCasePass");
-
-        WebElement loginElement=chrome.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertTrue(actions.isDisplayed(className("js-flash-alert"), 10), "Found the element");
+        ErrorMessage errorMessage=new ErrorMessage(chrome);
+        Assert.assertTrue(errorMessage.isDisplayed());
 
         chrome.quit();
     }
 
     @Test
     public void firefoxPositiveTestCase(){
-        //Tests the github login with correct input in email and password fields in firefox browser
+        /*
+        Testing the github login with correct input in email and password fields in firefox browser
+        1. Open https://github.com/login page
+        2. Login using valid credentials
+        3. Assert that home page is displayed
+        */
 
-        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         FirefoxDriver firefox=new FirefoxDriver();
-        SeleniumActions actions=new SeleniumActions(firefox);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(firefox);
         firefox.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
 
-        WebElement emailElement=firefox.findElement(By.name("login"));
-        //Input valid email
-        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
-
-        WebElement passwordElement=firefox.findElement(By.name("password"));
-        //Input valid password
-        passwordElement.sendKeys("LoginTestCasePass");
-
-        WebElement loginElement=firefox.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertTrue(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find element");
+        HomePage homePage=new HomePage(firefox);
+        Assert.assertFalse(homePage.isDisplayed());
 
         firefox.quit();
     }
 
     @Test
     public void firefoxTestLoginEmptyPass(){
-        //Tests the github login with correct input in email and empty password fields in firefox browser
+        /*Tests the github login with correct input in email and empty password fields in firefox browser
+        1. Open https://github.com/login page
+        2. Login using valid email credential and empty password field
+        3. Assert that error message is displayed
+        */
 
-        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         FirefoxDriver firefox=new FirefoxDriver();
-        SeleniumActions actions=new SeleniumActions(firefox);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(firefox);
         firefox.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("mesrop.karapetyan3@gmail.com", "");
 
-        WebElement emailElement=firefox.findElement(By.name("login"));
-        //Input valid email
-        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
-
-        WebElement passwordElement=firefox.findElement(By.name("password"));
-        //Password field is empty
-        passwordElement.sendKeys("");
-
-        WebElement loginElement=firefox.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertTrue(actions.isDisplayed(className("js-flash-alert"), 10), "Found the element");
+        ErrorMessage errorMessage=new ErrorMessage(firefox);
+        Assert.assertTrue(errorMessage.isDisplayed());
 
         firefox.quit();
     }
 
     @Test
     public void firefoxTestLoginIncorrectLogin(){
-        //Tests the github login with incorrect input in email and correct password fields in firefox browser
+        /*Tests the github login with incorrect input in email and correct password fields in firefox browser
+        1. Open https://github.com/login page
+        2. Login using invalid email credential and valid password credential
+        3. Assert that error message is displayed
+        */
 
-        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         FirefoxDriver firefox=new FirefoxDriver();
-        SeleniumActions actions=new SeleniumActions(firefox);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(firefox);
         firefox.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("IncorrectLogin", "LoginTestCasePass");
 
-        WebElement emailElement=firefox.findElement(By.name("login"));
-        //Input invalid email
-        emailElement.sendKeys("IncorrectLogin");
-
-        WebElement passwordElement=firefox.findElement(By.name("password"));
-        //Input valid password
-        passwordElement.sendKeys("LoginTestCasePass");
-
-        WebElement loginElement=firefox.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        Assert.assertTrue(actions.isDisplayed(className("js-flash-alert"), 10), "Found the element");
+        ErrorMessage errorMessage=new ErrorMessage(firefox);
+        Assert.assertTrue(errorMessage.isDisplayed());
 
         firefox.quit();
     }
     @Test
     public void chromeCorrectUsernameValidationTestCase(){
-        //Tests the github login with correct input in email and password fields in chrome browser
+        /*
+        Testing the github correct username validation in home page in chrome browser
+        1. Open https://github.com/login page
+        2. Login using valid credentials
+        3. Click on the avatar circle
+        4. Assert that the username is displayed correct
+        */
 
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeDriver chrome=new ChromeDriver();
-        SeleniumActions actions=new SeleniumActions(chrome);
-
-        //Open https://github.com/login page
+        LoginPage login=new LoginPage(chrome);
         chrome.get("https://github.com/login");
 
+        Assert.assertTrue(login.isDisplayed());
+        login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
 
-        WebElement emailElement=chrome.findElement(By.name("login"));
-        //Input valid email
-        emailElement.sendKeys("mesrop.karapetyan3@gmail.com");
-
-        WebElement passwordElement=chrome.findElement(By.name("password"));
-        //Input valid password
-        passwordElement.sendKeys("LoginTestCasePass");
-
-        WebElement loginElement=chrome.findElement(By.name("commit"));
-        //Click on "Sign in" button
-        loginElement.click();
-
-        WebElement buttonElement=chrome.findElement(By.className("Button-label"));
-        Assert.assertFalse(actions.isDisplayed(By.className("Button-label"), 10), "Couldn't find the element");
+        HomePage homePage=new HomePage(chrome);
+        Assert.assertFalse(homePage.isDisplayed());
+        WebElement buttonElement=chrome.findElement(HomePage.avatarElementLocator);
         buttonElement.click();
 
-        Assert.assertTrue(actions.isDisplayed(By.className("Truncate-text"), 10), "Found the element");
+        ValidUsernameMessage validUsername=new ValidUsernameMessage(chrome);
+        Assert.assertTrue(validUsername.isDisplayed());
 
         chrome.quit();
     }
