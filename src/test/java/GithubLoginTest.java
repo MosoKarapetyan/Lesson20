@@ -12,12 +12,13 @@ import util.WebDriverUtil;
 
 public class GithubLoginTest {
     private WebDriver driver;
+    LoginPage login;
 
     @BeforeMethod
     public void beforeTest(){
         driver= WebDriverUtil.getWebDriver();
         driver.get("https://github.com/login");
-        LoginPage login=new LoginPage(driver);
+        login=new LoginPage(driver);
         Assert.assertTrue(login.isDisplayed());
     }
 
@@ -34,9 +35,6 @@ public class GithubLoginTest {
         */
     @Test
     public void chromePositiveTestCase(){
-
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
         HomePage homePage=new HomePage(driver);
         Assert.assertTrue(homePage.isDisplayed());
@@ -49,8 +47,6 @@ public class GithubLoginTest {
         */
     @Test
     public void chromeTestLoginEmptyPass(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "");
         ErrorMessage errorMessage=new ErrorMessage(driver);
         Assert.assertTrue(errorMessage.isDisplayed());
@@ -63,8 +59,6 @@ public class GithubLoginTest {
        */
     @Test
     public void chromeTestLoginIncorrectLogin(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("IncorrectLogin", "LoginTestCasePass");
         ErrorMessage errorMessage=new ErrorMessage(driver);
         Assert.assertTrue(errorMessage.isDisplayed());
@@ -78,8 +72,6 @@ public class GithubLoginTest {
         */
     @Test
     public void firefoxPositiveTestCase(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
         HomePage homePage=new HomePage(driver);
         Assert.assertTrue(homePage.isDisplayed());
@@ -92,8 +84,6 @@ public class GithubLoginTest {
         */
     @Test
     public void firefoxTestLoginEmptyPass(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "");
         ErrorMessage errorMessage=new ErrorMessage(driver);
         Assert.assertTrue(errorMessage.isDisplayed());
@@ -106,8 +96,6 @@ public class GithubLoginTest {
 */
     @Test
     public void firefoxTestLoginIncorrectLogin(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("IncorrectLogin", "LoginTestCasePass");
         ErrorMessage errorMessage=new ErrorMessage(driver);
         Assert.assertTrue(errorMessage.isDisplayed());
@@ -122,8 +110,6 @@ public class GithubLoginTest {
         */
     @Test
     public void chromeCorrectUsernameValidationTestCase(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
         HomePage homePage=new HomePage(driver);
         Assert.assertTrue(homePage.isDisplayed());
