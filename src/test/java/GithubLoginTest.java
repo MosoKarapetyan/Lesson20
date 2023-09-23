@@ -56,20 +56,6 @@ public class GithubLoginTest {
         Assert.assertTrue(errorMessage.isDisplayed());
     }
 
-    /*Tests the github login with incorrect input in email and correct password fields in firefox browser
-    1. Open https://github.com/login page
-    2. Login using invalid email credential and valid password credential
-    3. Assert that error message is displayed
-    */
-    @Test
-    public void firefoxTestLoginIncorrectLogin(){
-        LoginPage login=new LoginPage(driver);
-        Assert.assertTrue(login.isDisplayed());
-        login.login("IncorrectLogin", "LoginTestCasePass");
-        ErrorMessage errorMessage=new ErrorMessage(driver);
-        Assert.assertTrue(errorMessage.isDisplayed());
-    }
-
     /*Tests the github login with incorrect input in email and correct password fields in chrome browser
        1. Open https://github.com/login page
        2. Login using invalid email credential and valid password credential
@@ -96,7 +82,7 @@ public class GithubLoginTest {
         Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
         HomePage homePage=new HomePage(driver);
-        Assert.assertFalse(homePage.isDisplayed());
+        Assert.assertTrue(homePage.isDisplayed());
     }
 
     /*Tests the github login with correct input in email and empty password fields in firefox browser
@@ -109,6 +95,20 @@ public class GithubLoginTest {
         LoginPage login=new LoginPage(driver);
         Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "");
+        ErrorMessage errorMessage=new ErrorMessage(driver);
+        Assert.assertTrue(errorMessage.isDisplayed());
+    }
+
+    /*Tests the github login with incorrect input in email and correct password fields in firefox browser
+1. Open https://github.com/login page
+2. Login using invalid email credential and valid password credential
+3. Assert that error message is displayed
+*/
+    @Test
+    public void firefoxTestLoginIncorrectLogin(){
+        LoginPage login=new LoginPage(driver);
+        Assert.assertTrue(login.isDisplayed());
+        login.login("IncorrectLogin", "LoginTestCasePass");
         ErrorMessage errorMessage=new ErrorMessage(driver);
         Assert.assertTrue(errorMessage.isDisplayed());
     }
@@ -126,7 +126,7 @@ public class GithubLoginTest {
         Assert.assertTrue(login.isDisplayed());
         login.login("mesrop.karapetyan3@gmail.com", "LoginTestCasePass");
         HomePage homePage=new HomePage(driver);
-        Assert.assertFalse(homePage.isDisplayed());
+        Assert.assertTrue(homePage.isDisplayed());
 
         ValidUsernameMessage validUsername=new ValidUsernameMessage(driver);
         Assert.assertTrue(validUsername.isDisplayed());
