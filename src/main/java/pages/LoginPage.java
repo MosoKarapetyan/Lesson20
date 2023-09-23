@@ -1,13 +1,19 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.BasePage;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
     By emailFieldLocator = By.name("login");
     By passwordFieldLocator = By.name("password");
-    static By loginButtonLocator = By.name("commit");
-    LoginPage(WebDriver driver){
+    By loginButtonLocator = By.name("commit");
+    public LoginPage(WebDriver driver){
         super (driver);
+    }
+    public boolean isDisplayed(){
+        return actions.isDisplayed(loginButtonLocator, 10);
     }
     public void login(String email, String password){
         WebElement emailElement= driver.findElement(emailFieldLocator);
